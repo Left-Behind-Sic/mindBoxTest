@@ -1,9 +1,23 @@
 import { Box, List, Typography } from "@mui/material";
 import TodoItem from "./TodoItem";
-import { useTodoContext } from "../context/useTodoContext";
+import { useTodosContext } from "../context/useTodosContext";
+import { useFilterContext } from "../context/useFilterContext";
+import { useMemo } from "react";
+import { ITodo } from "../types/todo";
 
 const TodoList = () => {
-	const { filteredTodos, toggleTodo, deleteTodo } = useTodoContext();
+	const { todos, toggleTodo, deleteTodo } = useTodosContext();
+	const { filter } = useFilterContext();
+
+	const filteredTodos = useMemo(() => {
+		return todos.filter((todo: ITodo) => {
+			if (filter === "all") return true;
+			if (filter === "active") return !todo.completed;
+			if (filter === "completed") return todo.completed;
+			return true;
+		});
+	}, [filter, todos]);
+
 	return (
 		<List
 			sx={{

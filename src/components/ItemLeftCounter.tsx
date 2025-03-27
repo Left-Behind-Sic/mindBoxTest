@@ -1,8 +1,9 @@
 import { Typography } from "@mui/material";
-import { useTodoContext } from "../context/useTodoContext";
+import { useStatsContext } from "../context/useStatsContext";
+import { memo } from "react";
 
-const ItemLeftCounter = () => {
-	const { activeCount } = useTodoContext();
+const ItemLeftCounter = memo(() => {
+	const { activeCount } = useStatsContext();
 	return (
 		<Typography
 			display="inline-flex"
@@ -21,6 +22,6 @@ const ItemLeftCounter = () => {
 			{activeCount} {activeCount === 1 ? "item" : "items"} left
 		</Typography>
 	);
-};
+});
 
 export default ItemLeftCounter;

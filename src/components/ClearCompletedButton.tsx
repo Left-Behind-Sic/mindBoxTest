@@ -1,8 +1,9 @@
 import { Button } from "@mui/material";
-import { useTodoContext } from "../context/useTodoContext";
+import { memo } from "react";
+import { useStatsContext } from "../context/useStatsContext";
 
-const ClearCompletedButton = () => {
-	const { clearCompleted, hasCompletedTodos } = useTodoContext();
+const ClearCompletedButton = memo(() => {
+	const { hasCompletedTodos, clearCompleted } = useStatsContext();
 	if (hasCompletedTodos) {
 		return (
 			<Button
@@ -23,6 +24,6 @@ const ClearCompletedButton = () => {
 			</Button>
 		);
 	}
-};
+});
 
 export default ClearCompletedButton;

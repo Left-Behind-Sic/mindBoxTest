@@ -1,6 +1,6 @@
 import { Box, Button, styled } from "@mui/material";
 import { memo, useCallback } from "react";
-import { useTodoContext } from "../context/useTodoContext";
+import { useFilterContext } from "../context/useFilterContext";
 
 const StyledButton = styled(Button)(({ selected }: { selected: boolean }) => ({
 	minWidth: "auto",
@@ -13,7 +13,7 @@ const StyledButton = styled(Button)(({ selected }: { selected: boolean }) => ({
 }));
 
 const TodoFilter = memo(() => {
-	const { filter, setFilter } = useTodoContext();
+	const { filter, setFilter } = useFilterContext();
 	// Мемоизируем обработчики нажатий на кнопки фильтра
 	const setAllFilter = useCallback(() => setFilter("all"), [setFilter]);
 	const setActiveFilter = useCallback(() => setFilter("active"), [setFilter]);

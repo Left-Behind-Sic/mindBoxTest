@@ -1,9 +1,8 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
-import { FilterType } from "../types";
+import { useState, useEffect, useCallback } from "react";
 import { ITodo } from "../types/todo";
-import { TodoContext } from "./TodoContext";
+import { TodosContext } from "./TodosContext";
 
-export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
+export const TodosProvider: React.FC<{ children: React.ReactNode }> = ({
 	children,
 }) => {
 	const [todos, setTodos] = useState<ITodo[]>(() => {
@@ -13,8 +12,6 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
 		}
 		return [];
 	});
-
-	const [filter, setFilter] = useState<FilterType>("all");
 
 	useEffect(() => {
 		localStorage.setItem("todos", JSON.stringify(todos));
@@ -51,46 +48,17 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
 		setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
 	}, []);
 
-	const clearCompleted = useCallback(() => {
-		setTodos((prevTodos) => prevTodos.filter((todo) => !todo.completed));
-	}, []);
-
-	const filteredTodos = useMemo(() => {
-		return todos.filter((todo) => {
-			if (filter === "all") return true;
-			if (filter === "active") return !todo.completed;
-			if (filter === "completed") return todo.completed;
-			return true;
-		});
-	}, [filter, todos]);
-
-	const activeCount = useMemo(
-		() => todos.filter((todo) => !todo.completed).length,
-		[todos]
-	);
-
-	const hasCompletedTodos = useMemo(
-		() => todos.some((todo) => todo.completed),
-		[todos]
-	);
-
 	return (
-		<TodoContext.Provider
+		<TodosContext.Provider
 			value={{
 				todos,
-				filter,
 				addTodo,
 				toggleTodo,
 				toggleAllTodos,
 				deleteTodo,
-				clearCompleted,
-				setFilter,
-				filteredTodos,
-				activeCount,
-				hasCompletedTodos,
 			}}
 		>
 			{children}
-		</TodoContext.Provider>
+		</TodosContext.Provider>
 	);
 };

@@ -1,12 +1,12 @@
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Box, IconButton, TextField } from "@mui/material";
 import { useCallback, useState } from "react";
-import { useTodoContext } from "../context/useTodoContext";
+import { useTodosContext } from "../context/useTodosContext";
 
 const TodoForm = () => {
 	const [text, setText] = useState("");
 
-	const { addTodo } = useTodoContext();
+	const { addTodo } = useTodosContext();
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
@@ -33,10 +33,7 @@ const TodoForm = () => {
 		>
 			<Box width={60} display="flex" justifyContent="center">
 				<IconButton
-					// onClick={toggleAllTodos}
 					sx={{
-						// height: 53,
-						// width: 53,
 						color: "text.disabled",
 					}}
 					size="small"
