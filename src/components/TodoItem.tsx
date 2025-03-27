@@ -32,40 +32,44 @@ const TodoItem = ({ todo, toggleTodo, deleteTodo }: TodoItemProps) => {
 					display: "flex",
 					alignItems: "center",
 					width: "100%",
+					justifyContent: "space-between",
 
 					py: 1,
 				}}
 			>
-				<Checkbox
-					checked={todo.completed}
-					onChange={() => toggleTodo(todo.id)}
-					size="large"
-					icon={<RadioButtonUncheckedIcon />}
-					checkedIcon={<CheckCircleOutlineIcon />}
-					sx={{
-						color: "#ededed",
-						"&.Mui-checked": {
-							color: "#A1D3C8",
-						},
-						// mr: 2,
-					}}
-				/>
-				<Typography
-					sx={{
-						width: "100%",
-						fontSize: 24,
-						fontWeight: 300,
-						lineHeight: 1,
-						py: 1,
-						maxWidth: 346,
-						// overflow: "hidden",
-						wordBreak: "break-word",
-						textDecoration: todo.completed ? "line-through" : undefined,
-						color: todo.completed ? "text.disabled" : "text.primary",
-					}}
-				>
-					{todo.text}
-				</Typography>
+				<Box display="flex" alignItems="center">
+					<Checkbox
+						checked={todo.completed}
+						onChange={() => toggleTodo(todo.id)}
+						size="large"
+						icon={<RadioButtonUncheckedIcon />}
+						checkedIcon={<CheckCircleOutlineIcon />}
+						sx={{
+							color: "#ededed",
+							"&.Mui-checked": {
+								color: "#A1D3C8",
+							},
+							// mr: 2,
+						}}
+					/>
+					<Typography
+						sx={{
+							width: "100%",
+							fontSize: 24,
+							fontWeight: 300,
+							lineHeight: 1,
+							py: 1,
+							maxWidth: 346,
+							// overflow: "hidden",
+							wordBreak: "break-word",
+							textDecoration: todo.completed ? "line-through" : undefined,
+							color: todo.completed ? "text.disabled" : "text.primary",
+						}}
+					>
+						{todo.text}
+					</Typography>
+				</Box>
+
 				<IconButton
 					className="delete-button"
 					onClick={() => deleteTodo(todo.id)}

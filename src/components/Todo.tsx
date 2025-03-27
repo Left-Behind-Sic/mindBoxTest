@@ -86,13 +86,12 @@ const Todo = () => {
 	);
 
 	return (
-		<Container maxWidth="lg" sx={{ py: 5, minWidth: 500 }}>
+		<Container maxWidth="lg" sx={{ width: "100%", m: 0, p: 1 }}>
 			<Typography
 				variant="h4"
 				component="h1"
 				sx={{
 					textAlign: "center",
-					mb: 3,
 				}}
 			>
 				todos

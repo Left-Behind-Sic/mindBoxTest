@@ -21,10 +21,12 @@ const Footer = ({
 	return (
 		<Box
 			sx={{
-				display: "flex",
+				display: "grid",
 				justifyContent: "space-between",
+				gridTemplateColumns: "1fr 1fr 1fr",
 				alignItems: "center",
-				px: 2,
+				gap: 1,
+				px: 1,
 				py: 1,
 				borderTop: "1px solid #ededed",
 				color: "text.secondary",
@@ -32,17 +34,31 @@ const Footer = ({
 				position: "relative",
 			}}
 		>
-			<Typography variant="body2" color="text.secondary">
+			<Typography
+				display="inline-flex"
+				variant="body2"
+				color="text.secondary"
+				// lineHeight={1}
+				align="center"
+				sx={{
+					// wordBreak: "break-word",
+					justifyContent: "flex-start",
+					width: "100%",
+					lineHeight: 1,
+					py: 0,
+				}}
+			>
 				{activeCount} {activeCount === 1 ? "item" : "items"} left
 			</Typography>
 			<TodoFilter filter={filter} setFilter={setFilter} />
 			{isVisibleClearButton && (
 				<Button
 					sx={{
-						textTransform: "none",
-						lineHeight: 1.2,
+						lineHeight: 1,
 						py: 0,
 						color: "text.secondary",
+						justifyContent: "flex-end",
+						width: "100%",
 						"&:hover": {
 							textDecoration: "underline",
 							backgroundColor: "transparent",

@@ -1,9 +1,9 @@
 import { FilterType } from "../types";
 import { Box, Button, styled } from "@mui/material";
 
-const StyledButton = styled(Button)(({ filter }: { filter: boolean }) => ({
+const StyledButton = styled(Button)(({ selected }: { selected: boolean }) => ({
 	minWidth: "auto",
-	border: filter ? "1px solid #EDDADA" : "1px solid transparent",
+	border: selected ? "1px solid #EDDADA" : "1px solid transparent",
 	padding: "2px 7px",
 	fontSize: 14,
 	"&:hover": {
@@ -22,16 +22,17 @@ const TodoFilter = ({ filter, setFilter }: TodoFilterProps) => {
 			sx={{
 				display: "flex",
 				gap: 0.5,
-				position: "absolute",
-				left: "50%",
-				transform: "translateX(-50%)",
+				justifyContent: "center",
+				// position: "absolute",
+				// left: "50%",
+				// transform: "translateX(-50%)",
 			}}
 		>
 			<StyledButton
 				size="small"
 				variant="text"
 				onClick={() => setFilter("all")}
-				filter={filter === "all"}
+				selected={filter === "all"}
 			>
 				All
 			</StyledButton>
@@ -39,7 +40,7 @@ const TodoFilter = ({ filter, setFilter }: TodoFilterProps) => {
 				size="small"
 				variant="text"
 				onClick={() => setFilter("active")}
-				filter={filter === "active"}
+				selected={filter === "active"}
 			>
 				Active
 			</StyledButton>
@@ -47,7 +48,7 @@ const TodoFilter = ({ filter, setFilter }: TodoFilterProps) => {
 				size="small"
 				variant="text"
 				onClick={() => setFilter("completed")}
-				filter={filter === "completed"}
+				selected={filter === "completed"}
 			>
 				Completed
 			</StyledButton>
