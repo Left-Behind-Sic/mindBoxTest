@@ -1,18 +1,23 @@
 import { Typography } from "@mui/material";
-import { useStatsContext } from "../context/StatsContext/useStatsContext";
-import { memo } from "react";
+import { useMemo } from "react";
+import { useTodosContext } from "../context/TodosContext/useTodosContext";
+import { ITodo } from "../types/todo";
 
-const ItemLeftCounter = memo(() => {
-	const { activeCount } = useStatsContext();
+const ItemLeftCounter = () => {
+	const { todos } = useTodosContext();
+
+	const activeCount = useMemo(
+		() => todos.filter((todo: ITodo) => !todo.completed).length,
+		[todos]
+	);
+
 	return (
 		<Typography
 			display="inline-flex"
 			variant="body2"
 			color="text.secondary"
-			// lineHeight={1}
 			align="center"
 			sx={{
-				// wordBreak: "break-word",
 				justifyContent: "flex-start",
 				width: "100%",
 				lineHeight: 1,
@@ -22,6 +27,6 @@ const ItemLeftCounter = memo(() => {
 			{activeCount} {activeCount === 1 ? "item" : "items"} left
 		</Typography>
 	);
-});
+};
 
 export default ItemLeftCounter;

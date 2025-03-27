@@ -49,7 +49,6 @@ const TodoItem = ({ todo, toggleTodo, deleteTodo }: TodoItemProps) => {
 							"&.Mui-checked": {
 								color: "#A1D3C8",
 							},
-							// mr: 2,
 						}}
 					/>
 					<Typography
@@ -60,7 +59,6 @@ const TodoItem = ({ todo, toggleTodo, deleteTodo }: TodoItemProps) => {
 							lineHeight: 1,
 							py: 1,
 							maxWidth: 346,
-							// overflow: "hidden",
 							wordBreak: "break-word",
 							textDecoration: todo.completed ? "line-through" : undefined,
 							color: todo.completed ? "text.disabled" : "text.primary",

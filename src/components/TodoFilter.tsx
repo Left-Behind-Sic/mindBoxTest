@@ -14,7 +14,7 @@ const StyledButton = styled(Button)(({ selected }: { selected: boolean }) => ({
 
 const TodoFilter = memo(() => {
 	const { filter, setFilter } = useFilterContext();
-	// Мемоизируем обработчики нажатий на кнопки фильтра
+
 	const setAllFilter = useCallback(() => setFilter("all"), [setFilter]);
 	const setActiveFilter = useCallback(() => setFilter("active"), [setFilter]);
 	const setCompletedFilter = useCallback(
@@ -28,9 +28,6 @@ const TodoFilter = memo(() => {
 				display: "flex",
 				gap: 0.5,
 				justifyContent: "center",
-				// position: "absolute",
-				// left: "50%",
-				// transform: "translateX(-50%)",
 			}}
 		>
 			<StyledButton

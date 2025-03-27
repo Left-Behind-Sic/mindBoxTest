@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { ITodo } from "../../types/todo";
 import { TodosContext } from "./TodosContext";
 
@@ -42,17 +42,23 @@ export const TodosProvider: React.FC<{ children: React.ReactNode }> = ({
 		setTodos((prev) => prev.filter((t) => t.id !== id));
 	}, []);
 
+	const clearCompleted = useCallback(() => {
+		setTodos((prev) => prev.filter((t) => !t.completed));
+	}, []);
+
+	const value = useMemo(
+		() => ({
+			todos,
+			setTodos,
+			addTodo,
+			toggleTodo,
+			toggleAllTodos,
+			deleteTodo,
+			clearCompleted,
+		}),
+		[todos, addTodo, toggleTodo, toggleAllTodos, deleteTodo, clearCompleted]
+	);
 	return (
-		<TodosContext.Provider
-			value={{
-				todos,
-				addTodo,
-				toggleTodo,
-				toggleAllTodos,
-				deleteTodo,
-			}}
-		>
-			{children}
-		</TodosContext.Provider>
+		<TodosContext.Provider value={value}>{children}</TodosContext.Provider>
 	);
 };

@@ -2,7 +2,8 @@ import Todo from "./components/Todo";
 import { ThemeProvider, createTheme, CssBaseline, Box } from "@mui/material";
 import { TodosProvider } from "./context/TodosContext/TodosProvider";
 import { FilterProvider } from "./context/FilterContext/FilterProvider";
-import { StatsProvider } from "./context/StatsContext/StatsProvider";
+import { CompletedProvider } from "./context/CompletedContext/CompletedProvider";
+import { InputProvider } from "./context/InputContext/InputProvider";
 
 const theme = createTheme({
 	palette: {
@@ -39,14 +40,6 @@ const theme = createTheme({
 				},
 			},
 		},
-		// MuiPaper: {
-		// 	styleOverrides: {
-		// 		root: {
-		// 			boxShadow:
-		// 				"0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 25px 50px 0 rgba(0, 0, 0, 0.05)",
-		// 		},
-		// 	},
-		// },
 	},
 });
 
@@ -56,20 +49,21 @@ function App() {
 			<CssBaseline />
 			<TodosProvider>
 				<FilterProvider>
-					<StatsProvider>
-						<Box
-							sx={{
-								display: "flex",
-								justifyContent: "center",
-								height: "100vh",
-								// padding: 0,
-								minWidth: 350,
-								backgroundColor: "background.default",
-							}}
-						>
-							<Todo />
-						</Box>
-					</StatsProvider>
+					<CompletedProvider>
+						<InputProvider>
+							<Box
+								sx={{
+									display: "flex",
+									justifyContent: "center",
+									height: "100vh",
+									minWidth: 350,
+									backgroundColor: "background.default",
+								}}
+							>
+								<Todo />
+							</Box>
+						</InputProvider>
+					</CompletedProvider>
 				</FilterProvider>
 			</TodosProvider>
 		</ThemeProvider>
