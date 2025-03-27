@@ -74,11 +74,6 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
 		[todos]
 	);
 
-	const allCompleted = useMemo(
-		() => todos.length > 0 && todos.every((todo) => todo.completed),
-		[todos]
-	);
-
 	return (
 		<TodoContext.Provider
 			value={{
@@ -93,7 +88,6 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
 				filteredTodos,
 				activeCount,
 				hasCompletedTodos,
-				allCompleted,
 			}}
 		>
 			{children}

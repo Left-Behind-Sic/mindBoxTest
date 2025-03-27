@@ -18,7 +18,6 @@ export type TodoContextType = {
 	filteredTodos: ITodo[];
 	activeCount: number;
 	hasCompletedTodos: boolean;
-	allCompleted: boolean;
 };
 
 export type FilterContextType = {
