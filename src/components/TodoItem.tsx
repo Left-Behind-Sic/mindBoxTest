@@ -58,7 +58,7 @@ const TodoItem = ({ todo, toggleTodo, deleteTodo }: TodoItemProps) => {
 							fontWeight: 300,
 							lineHeight: 1,
 							py: 1,
-							maxWidth: 346,
+							maxWidth: "100%",
 							wordBreak: "break-word",
 							textDecoration: todo.completed ? "line-through" : undefined,
 							color: todo.completed ? "text.disabled" : "text.primary",

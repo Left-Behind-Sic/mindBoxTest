@@ -5,7 +5,7 @@ import TodoList from "./TodoList";
 
 const Todo = () => {
 	return (
-		<Container maxWidth="lg" sx={{ width: "100%", m: 0, p: 1 }}>
+		<Container maxWidth="md" sx={{ width: "100%", m: 0, p: 1 }}>
 			<Typography
 				variant="h4"
 				component="h1"
