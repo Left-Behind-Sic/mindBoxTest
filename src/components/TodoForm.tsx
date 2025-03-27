@@ -1,8 +1,11 @@
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Box, IconButton } from "@mui/material";
 import TodoInput from "./TodoInput";
+import { useTodosContext } from "../context/TodosContext/useTodosContext";
 
 const TodoForm = () => {
+	const { toggleAllTodos } = useTodosContext();
+
 	return (
 		<Box
 			component="form"
@@ -19,6 +22,8 @@ const TodoForm = () => {
 						color: "text.disabled",
 					}}
 					size="small"
+					onClick={toggleAllTodos}
+					aria-label="toggle all todos"
 				>
 					<KeyboardArrowDownIcon />
 				</IconButton>
