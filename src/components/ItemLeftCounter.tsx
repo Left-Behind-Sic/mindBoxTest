@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { useStatsContext } from "../context/useStatsContext";
+import { useStatsContext } from "../context/StatsContext/useStatsContext";
 import { memo } from "react";
 
 const ItemLeftCounter = memo(() => {

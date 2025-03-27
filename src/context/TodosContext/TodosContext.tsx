@@ -1,5 +1,5 @@
 import React from "react";
-import { ITodo } from "../types/todo";
+import { ITodo } from "../../types/todo";
 
 export interface TodosContextType {
 	todos: ITodo[];

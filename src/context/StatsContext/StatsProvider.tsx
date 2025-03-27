@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { StatsContext } from "./StatsContext";
-import { ITodo } from "../types/todo";
-import { useTodosContext } from "./useTodosContext";
+import { ITodo } from "../../types/todo";
+import { useTodosContext } from "../TodosContext/useTodosContext";
 
 export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({
 	children,

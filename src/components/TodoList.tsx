@@ -1,7 +1,7 @@
 import { Box, List, Typography } from "@mui/material";
 import TodoItem from "./TodoItem";
-import { useTodosContext } from "../context/useTodosContext";
-import { useFilterContext } from "../context/useFilterContext";
+import { useTodosContext } from "../context/TodosContext/useTodosContext";
+import { useFilterContext } from "../context/FilterContext/useFilterContext";
 import { useMemo } from "react";
 import { ITodo } from "../types/todo";
 

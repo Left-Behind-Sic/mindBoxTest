@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { memo } from "react";
-import { useStatsContext } from "../context/useStatsContext";
+import { useStatsContext } from "../context/StatsContext/useStatsContext";
 
 const ClearCompletedButton = memo(() => {
 	const { hasCompletedTodos, clearCompleted } = useStatsContext();

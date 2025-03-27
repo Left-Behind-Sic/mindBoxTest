@@ -1,8 +1,8 @@
 import Todo from "./components/Todo";
 import { ThemeProvider, createTheme, CssBaseline, Box } from "@mui/material";
-import { TodosProvider } from "./context/TodosProvider";
-import { FilterProvider } from "./context/FilterProvider";
-import { StatsProvider } from "./context/StatsProvider";
+import { TodosProvider } from "./context/TodosContext/TodosProvider";
+import { FilterProvider } from "./context/FilterContext/FilterProvider";
+import { StatsProvider } from "./context/StatsContext/StatsProvider";
 
 const theme = createTheme({
 	palette: {

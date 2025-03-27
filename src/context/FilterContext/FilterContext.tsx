@@ -1,5 +1,5 @@
 import React from "react";
-import { FilterType } from "../types";
+import { FilterType } from "../../types";
 
 export interface FilterContextType {
 	filter: FilterType;

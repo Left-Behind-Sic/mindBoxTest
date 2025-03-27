@@ -1,6 +1,6 @@
 import { Box, Button, styled } from "@mui/material";
 import { memo, useCallback } from "react";
-import { useFilterContext } from "../context/useFilterContext";
+import { useFilterContext } from "../context/FilterContext/useFilterContext";
 
 const StyledButton = styled(Button)(({ selected }: { selected: boolean }) => ({
 	minWidth: "auto",

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FilterType } from "../types";
+import { FilterType } from "../../types";
 import { FilterContext } from "./FilterContext";
 
 export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({

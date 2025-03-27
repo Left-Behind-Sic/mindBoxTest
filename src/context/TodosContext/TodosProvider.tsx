@@ -1,16 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
-import { ITodo } from "../types/todo";
+import { ITodo } from "../../types/todo";
 import { TodosContext } from "./TodosContext";
 
 export const TodosProvider: React.FC<{ children: React.ReactNode }> = ({
 	children,
 }) => {
 	const [todos, setTodos] = useState<ITodo[]>(() => {
-		const savedTodos = localStorage.getItem("todos");
-		if (savedTodos) {
-			return JSON.parse(savedTodos);
-		}
-		return [];
+		const saved = localStorage.getItem("todos");
+		return saved ? JSON.parse(saved) : [];
 	});
 
 	useEffect(() => {
@@ -23,29 +20,26 @@ export const TodosProvider: React.FC<{ children: React.ReactNode }> = ({
 			text,
 			completed: false,
 		};
-		setTodos((prevTodos) => [newTodo, ...prevTodos]);
+		setTodos((prev) => [newTodo, ...prev]);
 	}, []);
 
 	const toggleTodo = useCallback((id: string) => {
-		setTodos((prevTodos) =>
-			prevTodos.map((todo) =>
+		setTodos((prev) =>
+			prev.map((todo) =>
 				todo.id === id ? { ...todo, completed: !todo.completed } : todo
 			)
 		);
 	}, []);
 
 	const toggleAllTodos = useCallback(() => {
-		setTodos((prevTodos) => {
-			const allCompleted = prevTodos.every((todo) => todo.completed);
-			return prevTodos.map((todo) => ({
-				...todo,
-				completed: !allCompleted,
-			}));
+		setTodos((prev) => {
+			const allCompleted = prev.every((t) => t.completed);
+			return prev.map((t) => ({ ...t, completed: !allCompleted }));
 		});
 	}, []);
 
 	const deleteTodo = useCallback((id: string) => {
-		setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+		setTodos((prev) => prev.filter((t) => t.id !== id));
 	}, []);
 
 	return (
