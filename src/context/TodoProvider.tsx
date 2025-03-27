@@ -1,11 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { FilterType } from "../types";
 import { ITodo } from "../types/todo";
-import {
-	TodoContext,
-	TodoDataContext,
-	TodoActionsContext,
-} from "./TodoContext";
+import { TodoContext } from "./TodoContext";
 
 export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
 	children,
@@ -34,32 +30,22 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
 	}, []);
 
 	const toggleTodo = useCallback((id: string) => {
-		setTodos((prevTodos) => {
-			const newTodos = [...prevTodos];
-			const todoIndex = newTodos.findIndex((todo) => todo.id === id);
-			if (todoIndex !== -1) {
-				newTodos[todoIndex] = {
-					...newTodos[todoIndex],
-					completed: !newTodos[todoIndex].completed,
-				};
-			}
-			return newTodos;
-		});
+		setTodos((prevTodos) =>
+			prevTodos.map((todo) =>
+				todo.id === id ? { ...todo, completed: !todo.completed } : todo
+			)
+		);
 	}, []);
 
-	const allCompleted = useMemo(
-		() => todos.length > 0 && todos.every((todo) => todo.completed),
-		[todos]
-	);
-
 	const toggleAllTodos = useCallback(() => {
-		setTodos((prevTodos) =>
-			prevTodos.map((todo) => ({
+		setTodos((prevTodos) => {
+			const allCompleted = prevTodos.every((todo) => todo.completed);
+			return prevTodos.map((todo) => ({
 				...todo,
 				completed: !allCompleted,
-			}))
-		);
-	}, [allCompleted]);
+			}));
+		});
+	}, []);
 
 	const deleteTodo = useCallback((id: string) => {
 		setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
@@ -88,48 +74,29 @@ export const TodoProvider: React.FC<{ children: React.ReactNode }> = ({
 		[todos]
 	);
 
-	// Мемоизируем функции, чтобы они не пересоздавались при каждом рендере
-	const todoActions = useMemo(
-		() => ({
-			addTodo,
-			toggleTodo,
-			toggleAllTodos,
-			deleteTodo,
-			clearCompleted,
-			setFilter,
-		}),
-		[addTodo, toggleTodo, toggleAllTodos, deleteTodo, clearCompleted, setFilter]
-	);
-
-	// Мемоизируем данные, чтобы они не пересоздавались при каждом рендере
-	const todoData = useMemo(
-		() => ({
-			todos,
-			filter,
-			filteredTodos,
-			activeCount,
-			hasCompletedTodos,
-			allCompleted,
-		}),
-		[todos, filter, filteredTodos, activeCount, hasCompletedTodos, allCompleted]
-	);
-
-	// Для обратной совместимости
-	const contextValue = useMemo(
-		() => ({
-			...todoData,
-			...todoActions,
-		}),
-		[todoData, todoActions]
+	const allCompleted = useMemo(
+		() => todos.length > 0 && todos.every((todo) => todo.completed),
+		[todos]
 	);
 
 	return (
-		<TodoActionsContext.Provider value={todoActions}>
-			<TodoDataContext.Provider value={todoData}>
-				<TodoContext.Provider value={contextValue}>
-					{children}
-				</TodoContext.Provider>
-			</TodoDataContext.Provider>
-		</TodoActionsContext.Provider>
+		<TodoContext.Provider
+			value={{
+				todos,
+				filter,
+				addTodo,
+				toggleTodo,
+				toggleAllTodos,
+				deleteTodo,
+				clearCompleted,
+				setFilter,
+				filteredTodos,
+				activeCount,
+				hasCompletedTodos,
+				allCompleted,
+			}}
+		>
+			{children}
+		</TodoContext.Provider>
 	);
 };

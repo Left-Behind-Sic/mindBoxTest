@@ -1,12 +1,12 @@
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Box, IconButton, TextField } from "@mui/material";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTodoContext } from "../context/useTodoContext";
 
 const TodoForm = () => {
 	const [text, setText] = useState("");
 
-	const { addTodo, toggleAllTodos, allCompleted } = useTodoContext();
+	const { addTodo } = useTodoContext();
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
@@ -15,6 +15,10 @@ const TodoForm = () => {
 			setText("");
 		}
 	};
+
+	const onChangeText = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+		setText(e.target.value);
+	}, []);
 
 	return (
 		<Box
@@ -29,11 +33,11 @@ const TodoForm = () => {
 		>
 			<Box width={60} display="flex" justifyContent="center">
 				<IconButton
-					onClick={toggleAllTodos}
+					// onClick={toggleAllTodos}
 					sx={{
 						// height: 53,
 						// width: 53,
-						color: allCompleted ? "primary.main" : "text.disabled",
+						color: "text.disabled",
 					}}
 					size="small"
 				>
@@ -44,7 +48,7 @@ const TodoForm = () => {
 				fullWidth
 				variant="standard"
 				value={text}
-				onChange={(e) => setText(e.target.value)}
+				onChange={onChangeText}
 				placeholder="What needs to be done?"
 				sx={{
 					"& .MuiInputBase-root": {

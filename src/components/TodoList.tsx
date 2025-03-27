@@ -1,14 +1,9 @@
 import { Box, List, Typography } from "@mui/material";
-import { useTodoData, useTodoActions } from "../context/useTodoContext";
 import TodoItem from "./TodoItem";
-import { memo } from "react";
+import { useTodoContext } from "../context/useTodoContext";
 
 const TodoList = () => {
-	const { filteredTodos } = useTodoData();
-	const { toggleTodo, deleteTodo } = useTodoActions();
-
-	console.log("TodoList render");
-
+	const { filteredTodos, toggleTodo, deleteTodo } = useTodoContext();
 	return (
 		<List
 			sx={{
@@ -53,4 +48,4 @@ const TodoList = () => {
 	);
 };
 
-export default memo(TodoList);
+export default TodoList;

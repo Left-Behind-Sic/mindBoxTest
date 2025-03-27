@@ -21,24 +21,6 @@ export type TodoContextType = {
 	allCompleted: boolean;
 };
 
-export type TodoActionsContextType = {
-	addTodo: (text: string) => void;
-	toggleTodo: (id: string) => void;
-	toggleAllTodos: () => void;
-	deleteTodo: (id: string) => void;
-	clearCompleted: () => void;
-	setFilter: (filter: FilterType) => void;
-};
-
-export type TodoDataContextType = {
-	todos: ITodo[];
-	filter: FilterType;
-	filteredTodos: ITodo[];
-	activeCount: number;
-	hasCompletedTodos: boolean;
-	allCompleted: boolean;
-};
-
 export type FilterContextType = {
 	filter: FilterType;
 	setFilter: (filter: FilterType) => void;
