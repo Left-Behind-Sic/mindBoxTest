@@ -1,15 +1,14 @@
-import { memo } from "react";
-import { Todo } from "../types";
-import TodoItem from "./TodoItem";
 import { Box, List, Typography } from "@mui/material";
+import { useTodoData, useTodoActions } from "../context/useTodoContext";
+import TodoItem from "./TodoItem";
+import { memo } from "react";
 
-interface TodoListProps {
-	todos: Todo[];
-	toggleTodo: (id: string) => void;
-	deleteTodo: (id: string) => void;
-}
+const TodoList = () => {
+	const { filteredTodos } = useTodoData();
+	const { toggleTodo, deleteTodo } = useTodoActions();
 
-const TodoList = ({ todos, toggleTodo, deleteTodo }: TodoListProps) => {
+	console.log("TodoList render");
+
 	return (
 		<List
 			sx={{
@@ -19,7 +18,7 @@ const TodoList = ({ todos, toggleTodo, deleteTodo }: TodoListProps) => {
 				overflow: "auto",
 			}}
 		>
-			{todos.length === 0 ? (
+			{filteredTodos.length === 0 ? (
 				<Box
 					sx={{
 						width: "100%",
@@ -41,7 +40,7 @@ const TodoList = ({ todos, toggleTodo, deleteTodo }: TodoListProps) => {
 					</Typography>
 				</Box>
 			) : (
-				todos.map((todo) => (
+				filteredTodos.map((todo) => (
 					<TodoItem
 						key={todo.id}
 						todo={todo}

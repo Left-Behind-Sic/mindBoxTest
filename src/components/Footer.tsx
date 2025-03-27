@@ -1,23 +1,9 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box } from "@mui/material";
+import ClearCompletedButton from "./ClearCompletedButton";
+import ItemLeftCounter from "./ItemLeftCounter";
 import TodoFilter from "./TodoFilter";
-import { memo } from "react";
-import { FilterType } from "../types";
 
-interface FooterProps {
-	activeCount: number;
-	isVisibleClearButton: boolean;
-	clearCompleted: () => void;
-	filter: FilterType;
-	setFilter: React.Dispatch<React.SetStateAction<FilterType>>;
-}
-
-const Footer = ({
-	activeCount,
-	clearCompleted,
-	isVisibleClearButton,
-	filter,
-	setFilter,
-}: FooterProps) => {
+const Footer = () => {
 	return (
 		<Box
 			sx={{
@@ -34,43 +20,11 @@ const Footer = ({
 				position: "relative",
 			}}
 		>
-			<Typography
-				display="inline-flex"
-				variant="body2"
-				color="text.secondary"
-				// lineHeight={1}
-				align="center"
-				sx={{
-					// wordBreak: "break-word",
-					justifyContent: "flex-start",
-					width: "100%",
-					lineHeight: 1,
-					py: 0,
-				}}
-			>
-				{activeCount} {activeCount === 1 ? "item" : "items"} left
-			</Typography>
-			<TodoFilter filter={filter} setFilter={setFilter} />
-			{isVisibleClearButton && (
-				<Button
-					sx={{
-						lineHeight: 1,
-						py: 0,
-						color: "text.secondary",
-						justifyContent: "flex-end",
-						width: "100%",
-						"&:hover": {
-							textDecoration: "underline",
-							backgroundColor: "transparent",
-						},
-					}}
-					onClick={clearCompleted}
-				>
-					Clear completed
-				</Button>
-			)}
+			<ItemLeftCounter />
+			<TodoFilter />
+			<ClearCompletedButton />
 		</Box>
 	);
 };
 
-export default memo(Footer);
+export default Footer;

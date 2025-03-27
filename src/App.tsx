@@ -1,5 +1,6 @@
 import Todo from "./components/Todo";
 import { ThemeProvider, createTheme, CssBaseline, Box } from "@mui/material";
+import { TodoProvider } from "./context/TodoProvider";
 
 const theme = createTheme({
 	palette: {
@@ -51,18 +52,20 @@ function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
-			<Box
-				sx={{
-					display: "flex",
-					justifyContent: "center",
-					height: "100vh",
-					// padding: 0,
-					minWidth: 350,
-					backgroundColor: "background.default",
-				}}
-			>
-				<Todo />
-			</Box>
+			<TodoProvider>
+				<Box
+					sx={{
+						display: "flex",
+						justifyContent: "center",
+						height: "100vh",
+						// padding: 0,
+						minWidth: 350,
+						backgroundColor: "background.default",
+					}}
+				>
+					<Todo />
+				</Box>
+			</TodoProvider>
 		</ThemeProvider>
 	);
 }

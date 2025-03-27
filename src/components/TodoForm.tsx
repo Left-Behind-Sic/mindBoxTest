@@ -1,15 +1,12 @@
-import { memo, useState } from "react";
-import { TextField, Box, IconButton } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Box, IconButton, TextField } from "@mui/material";
+import { useState } from "react";
+import { useTodoContext } from "../context/useTodoContext";
 
-interface TodoFormProps {
-	addTodo: (text: string) => void;
-	toggleAllTodos: () => void;
-	allCompleted: boolean;
-}
-
-const TodoForm = ({ addTodo, toggleAllTodos, allCompleted }: TodoFormProps) => {
+const TodoForm = () => {
 	const [text, setText] = useState("");
+
+	const { addTodo, toggleAllTodos, allCompleted } = useTodoContext();
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
@@ -85,4 +82,4 @@ const TodoForm = ({ addTodo, toggleAllTodos, allCompleted }: TodoFormProps) => {
 	);
 };
 
-export default memo(TodoForm);
+export default TodoForm;

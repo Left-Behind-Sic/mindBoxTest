@@ -1,5 +1,6 @@
-import { FilterType } from "../types";
 import { Box, Button, styled } from "@mui/material";
+import { memo, useCallback } from "react";
+import { useTodoContext } from "../context/useTodoContext";
 
 const StyledButton = styled(Button)(({ selected }: { selected: boolean }) => ({
 	minWidth: "auto",
@@ -11,12 +12,16 @@ const StyledButton = styled(Button)(({ selected }: { selected: boolean }) => ({
 	},
 }));
 
-interface TodoFilterProps {
-	filter: FilterType;
-	setFilter: (filter: FilterType) => void;
-}
+const TodoFilter = memo(() => {
+	const { filter, setFilter } = useTodoContext();
+	// Мемоизируем обработчики нажатий на кнопки фильтра
+	const setAllFilter = useCallback(() => setFilter("all"), [setFilter]);
+	const setActiveFilter = useCallback(() => setFilter("active"), [setFilter]);
+	const setCompletedFilter = useCallback(
+		() => setFilter("completed"),
+		[setFilter]
+	);
 
-const TodoFilter = ({ filter, setFilter }: TodoFilterProps) => {
 	return (
 		<Box
 			sx={{
@@ -31,7 +36,7 @@ const TodoFilter = ({ filter, setFilter }: TodoFilterProps) => {
 			<StyledButton
 				size="small"
 				variant="text"
-				onClick={() => setFilter("all")}
+				onClick={setAllFilter}
 				selected={filter === "all"}
 			>
 				All
@@ -39,7 +44,7 @@ const TodoFilter = ({ filter, setFilter }: TodoFilterProps) => {
 			<StyledButton
 				size="small"
 				variant="text"
-				onClick={() => setFilter("active")}
+				onClick={setActiveFilter}
 				selected={filter === "active"}
 			>
 				Active
@@ -47,13 +52,13 @@ const TodoFilter = ({ filter, setFilter }: TodoFilterProps) => {
 			<StyledButton
 				size="small"
 				variant="text"
-				onClick={() => setFilter("completed")}
+				onClick={setCompletedFilter}
 				selected={filter === "completed"}
 			>
 				Completed
 			</StyledButton>
 		</Box>
 	);
-};
+});
 
 export default TodoFilter;

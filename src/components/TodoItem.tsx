@@ -1,7 +1,7 @@
 import { Todo } from "../types";
 import { ListItem, Checkbox, Typography, IconButton, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { useState } from "react";
+import { useState, memo } from "react";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 
@@ -91,4 +91,4 @@ const TodoItem = ({ todo, toggleTodo, deleteTodo }: TodoItemProps) => {
 	);
 };
 
-export default TodoItem;
+export default memo(TodoItem);
