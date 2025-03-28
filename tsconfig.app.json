@@ -7,7 +7,12 @@
 		"module": "ESNext",
 		"skipLibCheck": true,
 
-		/* Bundler mode */
+		"allowJs": false,
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+
 		"moduleResolution": "bundler",
 		"allowImportingTsExtensions": true,
 		"isolatedModules": true,
@@ -15,12 +20,12 @@
 		"noEmit": true,
 		"jsx": "react-jsx",
 
-		/* Linting */
 		"strict": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
 		"noUncheckedSideEffectImports": true
 	},
-	"include": ["src"]
+	"include": ["src", "setupTests.d.ts", "vite-env.d.ts"],
+	"exclude": ["node_modules"]
 }
