@@ -14,7 +14,7 @@ export const InputContextProvider: React.FC<{ children: React.ReactNode }> = ({
 				text,
 				completed: false,
 			};
-			setTodos((prev) => [newTodo, ...prev]);
+			setTodos((prev) => [...prev, newTodo]);
 		},
 		[setTodos]
 	);
