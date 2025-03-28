@@ -14,6 +14,7 @@
 
 - React 18
 - TypeScript
+- FSD
 - Vite
 - Vitest и @testing-library для тестирования
 
